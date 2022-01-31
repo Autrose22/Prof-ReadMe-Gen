@@ -9,12 +9,12 @@ const questions = [
     {
         type: 'input',
         name: 'title',
-        message: 'What is the title of the project? (Required)',
+        message: 'What is the name of your project?',
         validate: titleInput => {
             if (titleInput) {
                 return true;
             } else {
-                console.log('You need to enter a title to continue!');
+                console.log('You need to enter a name to continue.');
                 return false;
             }
         }
@@ -23,12 +23,12 @@ const questions = [
     {
         type: 'input',
         name: 'description',
-        message: 'Provide a description of the project (Required)',
+        message: 'Provide a description of your project',
         validate: descriptionInput => {
             if (descriptionInput) {
                 return true;
             } else {
-                console.log('You need to provide a project description!');
+                console.log('You must provide a project description.');
                 return false;
             }
         }
@@ -37,12 +37,12 @@ const questions = [
     {
         type: 'input',
         name: 'installation',
-        message: 'How do you install your project? (Required)',
+        message: 'How did you install your project?',
         validate: installationInput => {
             if (installationInput) {
                 return true;
             } else {
-                console.log('You need to provide installation info to continue!');
+                console.log('You need to provide installation info to continue.');
                 return false;
             }
         }
@@ -51,40 +51,12 @@ const questions = [
     {
         type: 'input',
         name: 'usage',
-        message: 'How do you use this project? (Required)',
+        message: 'How do you use this project?',
         validate: usageInput => {
             if (usageInput) {
                 return true;
             } else {
-                console.log('You need to provide information on how to use project!');
-                return false;
-            }
-        }
-    },
-   
-    {
-        type: 'input',
-        name: 'contribution',
-        message: 'How should people contribute to this project? (Required)',
-        validate: contributionInput => {
-            if (contributionInput) {
-                return true;
-            } else {
-                console.log('You need to provide information on how to contribute to the project!');
-                return false;
-            }
-        }
-    },
-     
-    {
-        type: 'input',
-        name: 'testing',
-        message: 'How do you test this project? (Required)',
-        validate: testingInput => {
-            if (testingInput) {
-                return true;
-            } else {
-                console.log('You need to describe how to test this project!');
+                console.log('You must provide information on how to use project.');
                 return false;
             }
         }
@@ -93,13 +65,41 @@ const questions = [
     {
         type: 'checkbox',
         name: 'licensing',
-        message: 'Choose a license for your project (Required)',
-        choices: ['Apache', 'MIT', 'Mozilla-Public', 'GNU-General-Public', 'Common-Development-and Distribution', 'None'],
+        message: 'Choose a license for your project.',
+        choices: ['license 1', 'license 2', 'license 3', 'license 4', 'None'],
         validate: licensingInput => {
             if (licensingInput) {
                 return true;
             } else {
-                console.log('You must pick a license for the project!');
+                console.log('You must pick a license for your project.');
+                return false;
+            }
+        }
+    },
+
+    {
+        type: 'input',
+        name: 'contribution',
+        message: 'How should people contribute to this project?',
+        validate: contributionInput => {
+            if (contributionInput) {
+                return true;
+            } else {
+                console.log('You must provide information on how to contribute to your project.');
+                return false;
+            }
+        }
+    },
+     
+    {
+        type: 'input',
+        name: 'testing',
+        message: 'How do you test this project?',
+        validate: testingInput => {
+            if (testingInput) {
+                return true;
+            } else {
+                console.log('You must describe how to test your project.');
                 return false;
             }
         }
@@ -108,15 +108,21 @@ const questions = [
     {
         type: 'input',
         name: 'github',
-        message: 'Enter your GitHub Username (Required)',
+        message: 'Enter your GitHub Username',
         validate: githubInput => {
             if (githubInput) {
                 return true;
             } else {
-                console.log('Please enter your GitHub username!');
+                console.log('Please enter your GitHub username.');
                 return false;
             }
         }
+    },
+
+    {
+        type: 'input',
+        name: 'email',
+        message: 'Would you like to add your email?',
     },
 ];
 
@@ -130,7 +136,13 @@ function writeToFile(fileName, data) {
 };
 
 // TODO: Create a function to initialize app
-function init() {}
+function init() {
+    inquirer.prompt(questions)
+    .then(function (userInput) {
+        console.log(userInput)
+        writeToFile("README.md", generateMarkdown(userInput));
+    });
+};
 
 // Function call to initialize app
 init();
