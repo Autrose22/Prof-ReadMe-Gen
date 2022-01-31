@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Autrose22/Prof-ReadMe-Gen/issues"
   },
-  "homepage": "https://github.com/Autrose22/Prof-ReadMe-Gen#readme"
+  "homepage": "https://github.com/Autrose22/Prof-ReadMe-Gen#readme",
+  "dependencies": {
+    "inquirer": "^8.2.0"
+  }
 }
